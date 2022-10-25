@@ -11,7 +11,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { TaskModal } from "../TaskModal/TaskModal";
+import { TaskModal } from "../TaskModal";
 
 interface IColumnProps {
   readonly column: IColumn;

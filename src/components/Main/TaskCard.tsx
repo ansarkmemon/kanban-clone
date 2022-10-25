@@ -14,11 +14,11 @@ import {
   useDisclosure,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { SettingsIcon } from "@chakra-ui/icons";
+import { SettingsIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { ITask } from "../../types/workspace";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
-import { TaskModal } from "../TaskModal/TaskModal";
+import { TaskModal } from "../TaskModal";
 import { useWorkspaceContext } from "../../contexts/WorkspaceContext";
 
 interface ITaskCardProps {
@@ -73,11 +73,24 @@ export const TaskCard: React.FC<ITaskCardProps> = ({ task, index }) => {
                         as={IconButton}
                         size="sm"
                         variant="link"
-                        icon={<SettingsIcon w={3} h={3} />}
+                        icon={<SettingsIcon w={3.5} h={3.5} />}
                       />
                       <MenuList>
-                        <MenuItem onClick={onOpen}>Edit</MenuItem>
-                        <MenuItem onClick={onRemove}>Delete</MenuItem>
+                        <MenuItem
+                          fontWeight={700}
+                          icon={<EditIcon fontSize={16} />}
+                          onClick={onOpen}
+                        >
+                          <Text paddingTop={1}>Edit</Text>
+                        </MenuItem>
+                        <MenuItem
+                          icon={<DeleteIcon fontSize={16} />}
+                          color="red"
+                          fontWeight={700}
+                          onClick={onRemove}
+                        >
+                          <Text paddingTop={1}>Delete</Text>
+                        </MenuItem>
                       </MenuList>
                     </>
                   )}
