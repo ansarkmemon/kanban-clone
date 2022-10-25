@@ -4,6 +4,9 @@ The app is deployed on Vercel and can be viewed at `https://kanban-clone-vert.ve
 
 ## Demo
 
+https://user-images.githubusercontent.com/16633104/197829071-46df1909-8f2c-4f08-8e0e-1450a3d8a071.mp4
+
+
 ## Run the App locally (Development Server)
 
 To run the app locally - once you clone the app, `cd` into the app directory and run `npm i`.
