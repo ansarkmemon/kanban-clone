@@ -12,6 +12,7 @@ import {
   AvatarGroup,
   Avatar,
   useDisclosure,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { SettingsIcon } from "@chakra-ui/icons";
 import { ITask } from "../../types/workspace";
@@ -37,6 +38,7 @@ const categoryColorGenerator = (cat: string): ThemingProps["colorScheme"] => {
 export const TaskCard: React.FC<ITaskCardProps> = ({ task, index }) => {
   const { activeWorkspace, removeTask } = useWorkspaceContext();
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const backgroundColor = useColorModeValue("whiteAlpha.800", "dark");
 
   const onRemove = () => {
     removeTask(activeWorkspace?.id!, task.associations?.column!, task.id);
@@ -51,7 +53,7 @@ export const TaskCard: React.FC<ITaskCardProps> = ({ task, index }) => {
               borderWidth={2}
               borderRadius={4}
               borderColor="blackAlpha.100"
-              bgColor="whiteAlpha.800"
+              bgColor={backgroundColor}
               marginY={2}
               paddingLeft={2}
               paddingY={1.5}

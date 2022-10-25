@@ -7,6 +7,7 @@ import {
   Divider,
   IconButton,
   Text,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { PlusSquareIcon } from "@chakra-ui/icons";
@@ -20,15 +21,31 @@ export const Column: React.FC<IColumnProps> = ({ column }) => {
   const { onOpen, isOpen, onClose } = useDisclosure({
     id: "createModal",
   });
+  const style = useColorModeValue(
+    {
+      backgroundColor: "gray.50",
+      borderColor: "gray.200",
+      titleText: "blackAlpha.600",
+    },
+    {
+      backgroundColor: "gray.900",
+      borderColor: "gray.700",
+      titleText: "whiteAlpha.600",
+    }
+  );
   const tasks = column.tasks as ITask[];
 
   return (
-    <Container>
-      <Box bgColor="gray.50" height="inherit">
+    <Container
+      bgColor={style.backgroundColor}
+      borderWidth={1}
+      borderColor={style.borderColor}
+    >
+      <Box height="inherit">
         <Text
           as="h3"
           padding={3}
-          color="blackAlpha.600"
+          color={style.titleText}
           fontWeight={700}
           textTransform="uppercase"
           fontSize="sm"
@@ -76,18 +93,16 @@ export const Column: React.FC<IColumnProps> = ({ column }) => {
   );
 };
 
-const Container = styled.div`
-  border: 1px solid lightgrey;
+const Container = styled(Box)`
   border-radius: 2px;
   width: 100%;
   display: flex;
   flex-direction: column;
   min-height: 70vh;
-  background-color: #f7fafc;
 `;
 const TaskList = styled.div<{ isDraggingOver: boolean }>`
   padding: 8px;
   background-color: ${(props) =>
-    props.isDraggingOver ? "skyblue" : "inherit"};
+    props.isDraggingOver ? "#D6BCFA" : "inherit"};
   min-height: "100%";
 `;
