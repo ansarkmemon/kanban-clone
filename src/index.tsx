@@ -10,7 +10,9 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-worker.start();
+worker.start({
+  onUnhandledRequest: "bypass",
+});
 
 root.render(
   <ChakraProvider theme={theme}>
