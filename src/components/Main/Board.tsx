@@ -32,9 +32,10 @@ export const Board: React.FC = () => {
                 width="100%"
                 templateColumns={`repeat(${board.length}, 1fr)`}
                 gap={6}
+                maxWidth="1300px"
               >
                 {board.map((column, idx) => (
-                  <GridItem key={column.id}>
+                  <GridItem maxWidth="300px" key={column.id}>
                     <Column column={column} />
                   </GridItem>
                 ))}
