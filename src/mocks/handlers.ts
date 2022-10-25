@@ -62,8 +62,7 @@ export const handlers = [
     const workspaces = Object.entries(data.workspaces).map(
       ([_, value]) => value
     );
-    ctx.delay(1200);
-    return res(ctx.json({ workspaces }));
+    return res(ctx.delay(300), ctx.json({ workspaces }));
   }),
   rest.get("/api/workspaces/:workspaceId", (req, res, ctx) => {
     const { workspaceId } = req.params;
@@ -71,7 +70,7 @@ export const handlers = [
     const id = typeof workspaceId === "string" ? workspaceId : workspaceId[0];
     const columns = getExpandedColumnsForWorkspace(id);
 
-    return res(ctx.json(columns));
+    return res(ctx.delay(1200), ctx.json(columns));
   }),
   rest.post("/api/workspaces/:workspaceId/tasks", (req, res, ctx) => {
     const task = req.body as ITask;

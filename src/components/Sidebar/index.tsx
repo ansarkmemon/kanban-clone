@@ -12,13 +12,12 @@ import { BsBriefcaseFill } from "react-icons/bs";
 import { light, dark } from "./style";
 import { UserAvatar } from "./UserAvatar";
 import { useWorkspaceContext } from "../../contexts/WorkspaceContext";
+import { Loader } from "../Spinner";
 
 export const Sidebar = () => {
   const style = useColorModeValue(light, dark);
   const { activeWorkspace, setActiveWorkspace, workspaces, isLoading } =
     useWorkspaceContext();
-
-  if (isLoading) return <div>isLoading</div>;
 
   return (
     <Box
@@ -38,20 +37,24 @@ export const Sidebar = () => {
         >
           Workspaces
         </Text>
-        <List spacing={3} marginTop={4}>
-          {workspaces.map((workspace) => (
-            <StyledListItem
-              key={workspace.id}
-              onClick={() => setActiveWorkspace(workspace)}
-              selected={workspace.id === activeWorkspace?.id}
-            >
-              <ListIcon as={BsBriefcaseFill} color="gray.500" />
-              <Text as="b" color="gray.600">
-                {workspace.title}
-              </Text>
-            </StyledListItem>
-          ))}
-        </List>
+        {isLoading && !workspaces.length ? (
+          <Loader />
+        ) : (
+          <List spacing={3} marginTop={4}>
+            {workspaces.map((workspace) => (
+              <StyledListItem
+                key={workspace.id}
+                onClick={() => setActiveWorkspace(workspace)}
+                selected={workspace.id === activeWorkspace?.id}
+              >
+                <ListIcon as={BsBriefcaseFill} color="gray.500" />
+                <Text as="b" color="gray.600">
+                  {workspace.title}
+                </Text>
+              </StyledListItem>
+            ))}
+          </List>
+        )}
       </Box>
     </Box>
   );

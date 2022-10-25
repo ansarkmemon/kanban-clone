@@ -1,13 +1,13 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { useWorkspaceContext } from "../../contexts/WorkspaceContext";
+import { Loader } from "../Spinner";
 import { Column } from "./Column";
 
 export const Board: React.FC = () => {
   const { board, isBoardLoading, onTaskMove } = useWorkspaceContext();
 
-  // @TODO: Loader
-  if (isBoardLoading && !board.length) return <div>Loadin...</div>;
+  if (isBoardLoading && !board.length) return <Loader />;
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;

@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "./theme";
 import { worker } from "./mocks";
+import CustomErrorBoundary from "./components/ErrorBoundary";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -17,7 +18,9 @@ worker.start({
 root.render(
   <ChakraProvider theme={theme}>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <App />
+    <CustomErrorBoundary>
+      <App />
+    </CustomErrorBoundary>
   </ChakraProvider>
 );
 

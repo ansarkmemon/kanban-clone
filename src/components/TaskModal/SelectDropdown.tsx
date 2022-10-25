@@ -5,6 +5,7 @@ interface ISelectDropdownProps {
   options: { id: string; title: string }[];
 }
 
+// NOTE: Not adding onChange event for workspace as different workspaces are not functional
 export const SelectDropdown: React.FC<ISelectDropdownProps> = ({
   defaultValue,
   options,

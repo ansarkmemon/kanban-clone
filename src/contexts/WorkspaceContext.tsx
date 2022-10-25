@@ -1,11 +1,13 @@
 import {
   createContext,
   PropsWithChildren,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { DraggableLocation } from "react-beautiful-dnd";
+import { useAsyncError } from "../components/ErrorBoundary";
 import {
   deleteTask,
   fetchWorkspaceById,
@@ -45,53 +47,61 @@ export const WorkspaceProvider = (props: PropsWithChildren<{}>) => {
   const [isBoardLoading, setIsBoardLoading] = useState<boolean>(false);
   const [workspaces, setWorkspaces] = useState<IWorkspace[]>([]);
   const [board, setBoard] = useState<IColumn[]>([]);
+  const throwError = useAsyncError();
 
-  useEffect(() => {
-    loadWorkspaces();
-  }, []);
+  const loadTasks = useCallback(
+    async (activeWorkspaceId: string) => {
+      try {
+        setIsBoardLoading(true);
+        const columns = await fetchWorkspaceById(activeWorkspaceId);
+        setBoard(columns);
+      } catch (error) {
+        if (error instanceof Error) throwError(error);
+      } finally {
+        setIsBoardLoading(false);
+      }
+    },
+    [throwError]
+  );
 
-  useEffect(() => {
-    if (!activeWorkspace) return;
-    loadTasks(activeWorkspace.id);
-  }, [activeWorkspace]);
-
-  const loadTasks = async (activeWorkspaceId: string) => {
-    try {
-      setIsBoardLoading(true);
-      const columns = await fetchWorkspaceById(activeWorkspaceId);
-      setBoard(columns);
-    } catch (error) {
-      // Todo: Error Handling
-    } finally {
-      setIsBoardLoading(false);
-    }
-  };
-
-  const loadWorkspaces = async () => {
+  const loadWorkspaces = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await fetchWorkspaces();
       setWorkspaces(response.workspaces);
       setActiveWorkspace(response.workspaces[0]);
     } catch (error) {
-      // TODO: Error handling
+      if (error instanceof Error) throwError(error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [throwError]);
+
+  useEffect(() => {
+    loadWorkspaces();
+  }, [loadWorkspaces]);
+
+  useEffect(() => {
+    if (!activeWorkspace) return;
+    loadTasks(activeWorkspace.id);
+  }, [activeWorkspace, loadTasks]);
 
   const createNewTask = async (task: ITask) => {
     try {
       const columns = await postNewTask(task);
       setBoard(columns);
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof Error) throwError(error);
+    }
   };
 
   const updateTask = async (task: ITask) => {
     try {
       const columns = await putTask(task);
       setBoard(columns);
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof Error) throwError(error);
+    }
   };
 
   const removeTask = async (
@@ -102,7 +112,9 @@ export const WorkspaceProvider = (props: PropsWithChildren<{}>) => {
     try {
       const columns = await deleteTask(workspaceId, colId, taskId);
       setBoard(columns);
-    } catch (error) {}
+    } catch (error: unknown) {
+      if (error instanceof Error) throwError(error);
+    }
   };
 
   const onTaskMove = async (

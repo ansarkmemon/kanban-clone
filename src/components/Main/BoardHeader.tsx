@@ -3,10 +3,9 @@ import {
   Divider,
   Heading,
   Text,
-  Button,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { BiFilterAlt, BiShareAlt, BiEditAlt } from "react-icons/bi";
+import { BiFilterAlt, BiShareAlt, BiEditAlt, BiExport } from "react-icons/bi";
 import { IconButton } from "../IconButton";
 
 export const BoardHeader = () => {
@@ -29,9 +28,7 @@ export const BoardHeader = () => {
           <IconButton icon={BiEditAlt} text="Edit" />
           <IconButton icon={BiFilterAlt} text="Filter" />
           <IconButton icon={BiShareAlt} text="Share" />
-          <Button marginX={3} variant="outline" colorScheme={colorScheme}>
-            Export
-          </Button>
+          <IconButton icon={BiExport} text="Export" />
         </Box>
       </Box>
       <Divider />

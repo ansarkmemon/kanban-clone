@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { WorkspaceProvider } from "./contexts/WorkspaceContext";
 import { useEffect } from "react";
 import { initializeAppData } from "./helpers/request";
+import CustomErrorBoundary from "./components/ErrorBoundary";
 
 const App = () => {
   useEffect(() => {
@@ -13,12 +14,14 @@ const App = () => {
 
   return (
     <Layout>
-      <Grid templateColumns="300px 1fr">
-        <WorkspaceProvider>
-          <Sidebar />
-          <Main />
-        </WorkspaceProvider>
-      </Grid>
+      <CustomErrorBoundary>
+        <Grid templateColumns="300px 1fr">
+          <WorkspaceProvider>
+            <Sidebar />
+            <Main />
+          </WorkspaceProvider>
+        </Grid>
+      </CustomErrorBoundary>
     </Layout>
   );
 };
