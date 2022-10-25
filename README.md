@@ -1,4 +1,4 @@
-# The Address Book
+# Kanban Board - Trello Clone
 
 The app is deployed on Vercel and can be viewed at `https://kanban-clone-vert.vercel.app/` - [Demo](https://kanban-clone-vert.vercel.app/)
 
