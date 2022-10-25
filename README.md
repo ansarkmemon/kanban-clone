@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# The Address Book
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The app is deployed on Vercel and can be viewed at `https://kanban-clone-vert.vercel.app/` - [Demo](https://kanban-clone-vert.vercel.app/)
 
-## Available Scripts
+## Demo
 
-In the project directory, you can run:
+## Run the App locally (Development Server)
 
-### `npm start`
+To run the app locally - once you clone the app, `cd` into the app directory and run `npm i`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To start the app, run `npm run start` and you should be able to access the app on `localhost:3000`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Product Overview
 
-### `npm test`
+1. All the CRUD operations for the single workspace tasks are possible. You can Create, Edit, Update and Delete the tasks.
+2. The data is persistent in localstorage. When the user visits the app first time, the data is seeded from a local file (included). After that all the changes to the data are read and stored in local storage.
+3. Option to use Dark / Light modes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Architecture
 
-### `npm run build`
+The app is bootstrapped using Create React App since it comes with handy tooling setup and the app does not require SSR.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For styling purposes, Chakra UI component library is used since it provided beautiful, reusable components and is inspired by TailwindCSS. All Chakra components provide flexibility to add CSS properties through its props.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For Drag and Drop feature, `react-beautiful-dnd` library is used which is built on top of drag and drop DOM API, but provides the necessary consistency and gives handy utilities.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To replicate a server api behavior, a mock REST server is setup using `mockServiceWorker` which makes it easy to replicate the real behavior.
 
-### `npm run eject`
+Due to the lack of time, currently an `ErrorBoundary` is added to the app that takes care of all the UI related as well as Async errors. This helps to avoid white screen of death and allows a way for the app to recover gracefully.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Improvements / Features to add in later versions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [] Improve the app robustness by adding tests.
+- [] Improve Modal UI and add functionality to add tags and categories.
+- [] Dynamic list of users from some third party API
+- [] Make different Workspaces workable
