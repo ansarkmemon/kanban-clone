@@ -30,7 +30,7 @@ Due to the lack of time, currently an `ErrorBoundary` is added to the app that t
 
 ## Improvements / Features to add in later versions
 
-- [] Improve the app robustness by adding tests.
-- [] Improve Modal UI and add functionality to add tags and categories.
-- [] Dynamic list of users from some third party API
-- [] Make different Workspaces workable
+- [ ] Improve the app robustness by adding tests.
+- [ ] Improve Modal UI and add functionality to add tags and categories.
+- [ ] Dynamic list of users from some third party API
+- [ ] Make different Workspaces workable
